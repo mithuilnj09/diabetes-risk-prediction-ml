@@ -1,3 +1,6 @@
+# Binaries & Utilities
+cloudflared.exe
+
 # Environment variables
 .env
 .env.*
