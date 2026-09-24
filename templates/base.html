@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Diabetes Risk Prediction Using Machine Learning{% endblock %}</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Intelligent Clinical Machine Learning system for predicting diabetes risk using patient health data for early detection and preventive healthcare.">
+  <meta name="keywords" content="Machine Learning, Diabetes Risk Prediction, Healthcare AI, Random Forest, Clinical Decision Support">
+  <meta name="author" content="HealthAI Research Group">
+
+  <!-- Google Fonts: Plus Jakarta Sans with display=swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar-custom">
+    <div class="nav-container">
+      <a href="{{ url_for('index') }}" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div>
+          <span>GlucoPredict AI</span>
+          <span class="brand-sub">Clinical ML Risk Engine</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}" class="nav-item-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a></li>
+        <li><a href="{{ url_for('predict') }}" class="nav-item-link {% if request.endpoint == 'predict' %}active{% endif %}">Predict Risk</a></li>
+        <li><a href="{{ url_for('dashboard') }}" class="nav-item-link {% if request.endpoint == 'dashboard' %}active{% endif %}">ML Dashboard</a></li>
+        <li><a href="{{ url_for('predict') }}" class="nav-item-link nav-btn-cta">Predict Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Flash Alerts -->
+  <div class="main-wrapper">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="alert-container">
+          {% for category, message in messages %}
+            <div class="alert-item alert-{{ category }}">
+              <span>{{ message }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Main Content Block -->
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- Medical Disclaimer Banner & Footer -->
+  <footer class="footer-custom">
+    <div class="footer-content">
+      <div class="medical-disclaimer" style="margin: 0;">
+        <div class="disclaimer-icon">&#9888;</div>
+        <div>
+          <strong>Medical Notice & Educational Disclaimer:</strong>
+          This application is developed for educational and research purposes and should not be used as a substitute for professional medical diagnosis. Please consult a qualified healthcare professional for medical evaluation and personalized clinical care.
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; {{ current_year }} <strong>Diabetes Risk Prediction System</strong> | Built with Python, Scikit-Learn & Flask
+        </div>
+        <div>
+          Production Model: <span style="color: var(--accent-cyan); font-weight: 600;">{{ best_model_name }}</span> ({{ accuracy }}% Acc | ROC-AUC: {{ roc_auc }})
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom Scripts (Deferred for instant rendering) -->
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

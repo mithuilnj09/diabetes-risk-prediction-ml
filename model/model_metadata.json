@@ -1,0 +1,324 @@
+{
+  "dataset_summary": {
+    "source_file": "diabetes.csv",
+    "raw_records": 768,
+    "cleaned_records": 768,
+    "duplicates_removed": 0,
+    "train_records": 614,
+    "test_records": 154,
+    "target_column": "Outcome",
+    "diabetic_cases": 268,
+    "non_diabetic_cases": 500,
+    "invalid_zeros_handled": {
+      "Glucose": 5,
+      "BloodPressure": 35,
+      "SkinThickness": 227,
+      "Insulin": 374,
+      "BMI": 11
+    }
+  },
+  "feature_order": [
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "features": {
+    "Glucose": {
+      "name": "Glucose",
+      "type": "numerical",
+      "label": "Glucose Level",
+      "unit": "mg/dL",
+      "desc": "Plasma glucose concentration (2 hours in an OGTT)",
+      "min": 44.0,
+      "max": 199.0,
+      "median": 117.0,
+      "mean": 121.69,
+      "step": 1,
+      "default_value": 117.0
+    },
+    "BloodPressure": {
+      "name": "BloodPressure",
+      "type": "numerical",
+      "label": "Blood Pressure",
+      "unit": "mm Hg",
+      "desc": "Diastolic blood pressure",
+      "min": 24.0,
+      "max": 122.0,
+      "median": 72.0,
+      "mean": 72.41,
+      "step": 1,
+      "default_value": 72.0
+    },
+    "SkinThickness": {
+      "name": "SkinThickness",
+      "type": "numerical",
+      "label": "Skin Thickness",
+      "unit": "mm",
+      "desc": "Triceps skin fold thickness",
+      "min": 7.0,
+      "max": 99.0,
+      "median": 29.0,
+      "mean": 29.15,
+      "step": 1,
+      "default_value": 29.0
+    },
+    "Insulin": {
+      "name": "Insulin",
+      "type": "numerical",
+      "label": "Insulin Level",
+      "unit": "\u03bcU/mL",
+      "desc": "2-Hour serum insulin level",
+      "min": 14.0,
+      "max": 846.0,
+      "median": 125.0,
+      "mean": 155.55,
+      "step": 1,
+      "default_value": 125.0
+    },
+    "BMI": {
+      "name": "BMI",
+      "type": "numerical",
+      "label": "Body Mass Index (BMI)",
+      "unit": "kg/m\u00b2",
+      "desc": "Body mass index = weight in kg / (height in m)\u00b2",
+      "min": 18.2,
+      "max": 67.1,
+      "median": 32.3,
+      "mean": 32.46,
+      "step": 0.1,
+      "default_value": 32.3
+    },
+    "DiabetesPedigreeFunction": {
+      "name": "DiabetesPedigreeFunction",
+      "type": "numerical",
+      "label": "Diabetes Pedigree Function",
+      "unit": "Score",
+      "desc": "Genetic diabetes risk score based on family history",
+      "min": 0.08,
+      "max": 2.42,
+      "median": 0.37,
+      "mean": 0.47,
+      "step": 0.01,
+      "default_value": 0.37
+    },
+    "Age": {
+      "name": "Age",
+      "type": "numerical",
+      "label": "Age",
+      "unit": "Years",
+      "desc": "Patient age in years",
+      "min": 21.0,
+      "max": 81.0,
+      "median": 29.0,
+      "mean": 33.24,
+      "step": 1,
+      "default_value": 29.0
+    }
+  },
+  "best_model": {
+    "name": "Support Vector Machine",
+    "metrics": {
+      "accuracy": 0.7597,
+      "precision": 0.6308,
+      "recall": 0.7593,
+      "f1_score": 0.6891,
+      "roc_auc": 0.8183,
+      "confusion_matrix": [
+        [
+          76,
+          24
+        ],
+        [
+          13,
+          41
+        ]
+      ]
+    },
+    "feature_importance": {
+      "Glucose": 0.1429,
+      "BloodPressure": 0.1429,
+      "SkinThickness": 0.1429,
+      "Insulin": 0.1429,
+      "BMI": 0.1429,
+      "DiabetesPedigreeFunction": 0.1429,
+      "Age": 0.1429
+    }
+  },
+  "model_comparison": {
+    "Logistic Regression": {
+      "accuracy": 0.7143,
+      "precision": 0.5806,
+      "recall": 0.6667,
+      "f1_score": 0.6207,
+      "roc_auc": 0.7948,
+      "confusion_matrix": [
+        [
+          74,
+          26
+        ],
+        [
+          18,
+          36
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "accuracy": 0.7338,
+      "precision": 0.6182,
+      "recall": 0.6296,
+      "f1_score": 0.6239,
+      "roc_auc": 0.7777,
+      "confusion_matrix": [
+        [
+          79,
+          21
+        ],
+        [
+          20,
+          34
+        ]
+      ]
+    },
+    "Random Forest": {
+      "accuracy": 0.7468,
+      "precision": 0.6087,
+      "recall": 0.7778,
+      "f1_score": 0.6829,
+      "roc_auc": 0.8161,
+      "confusion_matrix": [
+        [
+          73,
+          27
+        ],
+        [
+          12,
+          42
+        ]
+      ]
+    },
+    "K-Nearest Neighbors": {
+      "accuracy": 0.7662,
+      "precision": 0.68,
+      "recall": 0.6296,
+      "f1_score": 0.6538,
+      "roc_auc": 0.8237,
+      "confusion_matrix": [
+        [
+          84,
+          16
+        ],
+        [
+          20,
+          34
+        ]
+      ]
+    },
+    "Support Vector Machine": {
+      "accuracy": 0.7597,
+      "precision": 0.6308,
+      "recall": 0.7593,
+      "f1_score": 0.6891,
+      "roc_auc": 0.8183,
+      "confusion_matrix": [
+        [
+          76,
+          24
+        ],
+        [
+          13,
+          41
+        ]
+      ]
+    }
+  },
+  "chart_data": {
+    "class_distribution": {
+      "labels": [
+        "Non-Diabetic",
+        "Diabetic"
+      ],
+      "counts": [
+        500,
+        268
+      ]
+    },
+    "model_comparison": {
+      "models": [
+        "Logistic Regression",
+        "Decision Tree",
+        "Random Forest",
+        "K-Nearest Neighbors",
+        "Support Vector Machine"
+      ],
+      "accuracy": [
+        0.7143,
+        0.7338,
+        0.7468,
+        0.7662,
+        0.7597
+      ],
+      "precision": [
+        0.5806,
+        0.6182,
+        0.6087,
+        0.68,
+        0.6308
+      ],
+      "recall": [
+        0.6667,
+        0.6296,
+        0.7778,
+        0.6296,
+        0.7593
+      ],
+      "f1_score": [
+        0.6207,
+        0.6239,
+        0.6829,
+        0.6538,
+        0.6891
+      ],
+      "roc_auc": [
+        0.7948,
+        0.7777,
+        0.8161,
+        0.8237,
+        0.8183
+      ]
+    },
+    "confusion_matrix": [
+      [
+        76,
+        24
+      ],
+      [
+        13,
+        41
+      ]
+    ],
+    "feature_importance": {
+      "features": [
+        "Glucose",
+        "BloodPressure",
+        "SkinThickness",
+        "Insulin",
+        "BMI",
+        "DiabetesPedigreeFunction",
+        "Age"
+      ],
+      "scores": [
+        0.1429,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.1429
+      ]
+    }
+  }
+}

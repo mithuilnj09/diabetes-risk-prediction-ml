@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}Diabetes Risk Prediction Using Machine Learning | Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-card">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    State-of-the-Art Clinical ML Benchmark
+  </div>
+  
+  <h1 class="hero-title">Diabetes Risk Prediction Using Machine Learning</h1>
+  <p class="hero-subtitle">
+    An intelligent machine learning system for predicting diabetes risk using patient health data.
+  </p>
+
+  <div class="hero-actions">
+    <a href="{{ url_for('predict') }}" class="btn-primary-glow">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+      Predict Now
+    </a>
+    <a href="{{ url_for('dashboard') }}" class="btn-secondary-outline">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      View Dashboard
+    </a>
+  </div>
+</div>
+
+<!-- Key Performance Highlights -->
+{% if metadata %}
+<div class="metrics-grid">
+  <div class="metric-card">
+    <div class="metric-top">
+      <span class="metric-label">Best Model</span>
+      <div class="metric-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      </div>
+    </div>
+    <div class="metric-value">{{ metadata.best_model.name }}</div>
+    <div class="metric-sub">Auto-selected from 5 algorithms</div>
+  </div>
+
+  <div class="metric-card">
+    <div class="metric-top">
+      <span class="metric-label">Model Accuracy</span>
+      <div class="metric-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+    </div>
+    <div class="metric-value">{{ (metadata.best_model.metrics.accuracy * 100)|round(1) }}%</div>
+    <div class="metric-sub">Stratified Holdout Test Set</div>
+  </div>
+
+  <div class="metric-card">
+    <div class="metric-top">
+      <span class="metric-label">ROC-AUC Score</span>
+      <div class="metric-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="metric-value">{{ metadata.best_model.metrics.roc_auc }}</div>
+    <div class="metric-sub">Class discrimination performance</div>
+  </div>
+
+  <div class="metric-card">
+    <div class="metric-top">
+      <span class="metric-label">Verified Kaggle Records</span>
+      <div class="metric-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+        </svg>
+      </div>
+    </div>
+    <div class="metric-value">{{ metadata.dataset_summary.cleaned_records }}</div>
+    <div class="metric-sub">{{ metadata.dataset_summary.train_records }} train / {{ metadata.dataset_summary.test_records }} test split</div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Problem Statement & Objective Section -->
+<div class="glass-card">
+  <div class="section-header">
+    <h2 class="section-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+      Problem Statement & Clinical Objective
+    </h2>
+    <p class="section-desc">Understanding the healthcare challenge and predictive machine learning intervention.</p>
+  </div>
+
+  <div style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--accent-cyan); padding: 1.25rem 1.5rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 1.5rem;">
+    <p style="font-size: 1.1rem; font-style: italic; color: #e2e8f0;">
+      “To develop a Machine Learning model that predicts the risk of diabetes using patient health data for early detection and preventive healthcare.”
+    </p>
+  </div>
+
+  <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+    Diabetes mellitus is one of the most prevalent chronic conditions worldwide, leading to cardiovascular complications, renal failure, retinopathy, and neuropathy if left undetected. Traditional clinical screenings often catch hyperglycemia late in its trajectory. 
+  </p>
+  <p style="color: var(--text-muted); font-size: 0.95rem;">
+    This system integrates supervised machine learning with verified medical datasets to identify early predictive patterns across non-invasive and routine lab markers (including blood glucose, insulin response, body mass index, blood pressure, and age) to alert individuals and physicians before irreversible metabolic complications arise.
+  </p>
+</div>
+
+<!-- How the System Works & Machine Learning Workflow -->
+<div class="glass-card">
+  <div class="section-header">
+    <h2 class="section-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </svg>
+      Machine Learning Architecture & Workflow
+    </h2>
+    <p class="section-desc">End-to-end data science and clinical prediction pipeline.</p>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-box">
+      <span class="step-number">Step 01</span>
+      <h3 class="step-title">Dataset Ingestion & Inspection</h3>
+      <p class="step-desc">
+        Dynamic ingestion of the Kaggle diabetes dataset. Automatic column schema discovery, class distribution profiling, and detection of target outcome variables.
+      </p>
+    </div>
+
+    <div class="step-box">
+      <span class="step-number">Step 02</span>
+      <h3 class="step-title">Physiological Cleaning & Imputation</h3>
+      <p class="step-desc">
+        Medically impossible zero values (in glucose, diastolic pressure, skinfold, and BMI) are detected and imputed using median statistics on the training partition to prevent data leakage.
+      </p>
+    </div>
+
+    <div class="step-box">
+      <span class="step-number">Step 03</span>
+      <h3 class="step-title">Multi-Algorithm Benchmark</h3>
+      <p class="step-desc">
+        Rigorous cross-comparison across Logistic Regression, Decision Tree, Random Forest, K-Nearest Neighbors, and Support Vector Machine on balanced validation metrics.
+      </p>
+    </div>
+
+    <div class="step-box">
+      <span class="step-number">Step 04</span>
+      <h3 class="step-title">Pipeline Serialization & Inference</h3>
+      <p class="step-desc">
+        The top-performing model is packaged into a self-contained Scikit-Learn pipeline via Joblib, enabling instantaneous patient risk scoring with probability outputs.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Notice Callout -->
+<div class="medical-disclaimer">
+  <div class="disclaimer-icon">&#9888;</div>
+  <div>
+    <strong>Disclaimer:</strong> This application is developed for educational and research purposes and should not be used as a substitute for professional medical diagnosis.
+  </div>
+</div>
+{% endblock %}
